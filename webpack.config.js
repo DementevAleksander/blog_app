@@ -1,7 +1,7 @@
 const HTMLPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: ['./src/index.js'], //входная точка нашего приложения (путь до файла)
+  entry: ['@babel/polyfill', './src/index.js'], //входная точка нашего приложения (путь до файла), '@babel/polyfill' - webpack записывает полифилы в результирующий файл 'bundle.js'
   output: { //куда собираем наш проект
     path: __dirname + '/dist', // __dirname - глобальная переменная, отвечающая за текущий путь
     filename: 'bundle.js' //файл, в котором будут собираться скрипты
@@ -17,5 +17,10 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js'] //чтобы каждый раз не приписывать расширение файла.
+  },
+  module: { //https://babeljs.io/setup#installation (Webpack)
+    rules: [
+      {test: /\.m?js$/, exclude: /node_modules/, use: {loader: "babel-loader", options: {presets: ['@babel/preset-env']}}}
+    ]
   }
 }
