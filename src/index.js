@@ -1,3 +1,4 @@
-async function app() {
-  await fetch('start babel!')
-}
+import {HeaderComponent} from './components/header.component'
+
+const header = new HeaderComponent('header')
+console.log(header)
